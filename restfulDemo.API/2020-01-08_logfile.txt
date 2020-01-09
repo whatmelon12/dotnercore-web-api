@@ -1,0 +1,12 @@
+2020-01-08 14:00:25.8619 INFO Here is info message from the controller.
+2020-01-08 14:00:25.8997 DEBUG Here is debug message from the controller.
+2020-01-08 14:00:25.9013 WARN Here is warn message from the controller.
+2020-01-08 14:00:25.9023 ERROR Here is error message from the controller.
+2020-01-08 16:17:39.7089 ERROR Something went wrong in get all owners action: 42P01: relation "owner" does not exist
+2020-01-08 22:13:36.6577 ERROR Something went wrong in get all owners action: 42703: column o.OwnerId does not exist
+2020-01-08 22:15:23.1672 ERROR Something went wrong in get all owners action: 42703: column o.OwnerId does not exist
+2020-01-08 22:17:23.6542 INFO Retuned all owners from database.
+2020-01-08 22:35:48.5270 INFO Retuned all owners from database.
+2020-01-08 22:42:58.5728 INFO Returned owner with id: a10a7d79-884f-49a8-ac3e-bf3e8d5ccd68
+2020-01-08 22:43:37.1087 ERROR Owner with id: 00000000-0000-0000-0000-000000000000, hasn't been found in db.
+2020-01-08 22:43:47.5176 ERROR Owner with id: 00000000-0000-0000-0000-000000000000, hasn't been found in db.
