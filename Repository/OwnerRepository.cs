@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Contracts;
 using Entities;
 using Entities.Models;
@@ -15,14 +16,14 @@ namespace Repository
         {
         }
 
-        public IEnumerable<Owner> GetAllOwners(int page = 1, int limit = 10)
+        public async Task<IEnumerable<Owner>> GetAllOwnersAsync(int page = 1, int limit = 10)
         {
-            return FindAll().OrderBy(o => o.Name).Skip((page == 1 ? 0 : page) * limit).Take(limit).ToList();
+            return await FindAll().OrderBy(o => o.Name).Skip((page == 1 ? 0 : page) * limit).Take(limit).ToListAsync();
         }
 
-        public Owner GetOwnerById(Guid ownerId)
+        public async Task<Owner> GetOwnerByIdAsync(Guid ownerId)
         {
-            return FindByCondition(owner => owner.Id.Equals(ownerId)).FirstOrDefault();
+            return await FindByCondition(owner => owner.Id.Equals(ownerId)).FirstOrDefaultAsync();
         }
 
         public void CreateOwner(Owner owner)
@@ -40,9 +41,9 @@ namespace Repository
             Delete(owner);
         }
 
-        public IEnumerable<Owner> GetTopOwners()
+        public async Task<IEnumerable<Owner>> GetTopOwnersAsync()
         {
-           return _repositoryContext.Owners.FromSqlRaw("SELECT TOP(3) * FROM owner").ToList();
+           return await _repositoryContext.Owners.FromSqlRaw("SELECT TOP(3) * FROM owner").ToListAsync();
         }
     }
 }

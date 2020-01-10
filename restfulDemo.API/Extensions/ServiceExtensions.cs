@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repository;
+using restfulDemo.API.ActionFilters;
 
 namespace restfulDemo.API.Extensions
 {
@@ -47,6 +48,11 @@ namespace restfulDemo.API.Extensions
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+        }
+
+        public static void ConfigureActionFilters(this IServiceCollection services)
+        {
+            services.AddScoped<ModelValidationAttribute>();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Entities.DataTransferObjects
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Date of birth is required")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Address is required")]
         [StringLength(100, ErrorMessage = "Address cannot be loner then 100 characters")]

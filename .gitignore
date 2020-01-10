@@ -362,7 +362,7 @@ MigrationBackup/
 /wwwroot/node_modules
 
 # Logs
-/logs
+logs/
 
 ### VisualStudio ###
 

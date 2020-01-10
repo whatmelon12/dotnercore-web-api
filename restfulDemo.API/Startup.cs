@@ -37,6 +37,7 @@ namespace restfulDemo.API
             services.ConfigureMySqlContext(Configuration);
             services.ConfigureRepositoryWrapper();
             services.AddAutoMapper(typeof(Startup));
+            services.ConfigureActionFilters();
             services.AddControllers();
         }
 
@@ -48,11 +49,15 @@ namespace restfulDemo.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseErrorHandlerMiddleware();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseRequestResponseLoggingMiddleware();
 
             app.UseEndpoints(endpoints =>
             {

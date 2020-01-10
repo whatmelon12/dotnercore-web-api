@@ -1,5 +1,6 @@
 ﻿using NLog;
 using Contracts;
+using System;
 
 namespace LoggerService
 {
@@ -16,6 +17,11 @@ namespace LoggerService
         public void LogError(string message)
         {
             logger.Error(message);
+        }
+
+        public void LogError(string message, Exception ex)
+        {
+            logger.Error(ex, message);
         }
 
         public void LogInfo(string message)
