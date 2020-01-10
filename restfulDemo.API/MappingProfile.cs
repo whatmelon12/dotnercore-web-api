@@ -10,6 +10,8 @@ namespace restfulDemo.API
         public MappingProfile()
         {
             CreateMap<Owner, OwnerDto>();
+            CreateMap<OwnerCreationDto, Owner>();
+            CreateMap<OwnerUpdateDto, Owner>();
         }
     }
 }

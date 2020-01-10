@@ -33,7 +33,8 @@ namespace restfulDemo.API
             services.ConfigureLoggerService();
             services.ConfigureCors();
             services.ConfigureIISIntegration();
-            services.ConfigurePostgreSqlContext(Configuration);
+            //services.ConfigurePostgreSqlContext(Configuration);
+            services.ConfigureMySqlContext(Configuration);
             services.ConfigureRepositoryWrapper();
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();

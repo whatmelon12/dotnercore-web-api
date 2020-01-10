@@ -38,6 +38,12 @@ namespace restfulDemo.API.Extensions
             services.AddDbContext<RepositoryContext>(options => options.UseNpgsql(connectionString));
         }
 
+        public static void ConfigureMySqlContext(this IServiceCollection services, IConfiguration config)
+        {
+            var connectionString = config["MySqlConnection:connectionString"];
+            services.AddDbContext<RepositoryContext>(options => options.UseMySql(connectionString));
+        }
+
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
