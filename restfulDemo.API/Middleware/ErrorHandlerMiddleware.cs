@@ -27,20 +27,24 @@ namespace restfulDemo.API.Middleware
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message, ex);
+
                 await HandleExceptionAsync(context, ex);
             }
         }
 
-        public Task HandleExceptionAsync(HttpContext context, Exception ex)
+        private static Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-
-            return context.Response.WriteAsync(new ErrorDetail()
+            var errorDetail = new ErrorDetail()
             {
-                StatusCode = context.Response.StatusCode,
-                Message = "Internal Server Error from the custom middleware."
-            }.ToString());
+                Message = ex.Message,
+                StatusCode = (int)HttpStatusCode.InternalServerError
+            };
+
+            if (ex is InvalidOperationException) errorDetail.StatusCode = (int)HttpStatusCode.BadRequest;
+
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = errorDetail.StatusCode;
+            return context.Response.WriteAsync(errorDetail.ToString());
         }
     }
 }

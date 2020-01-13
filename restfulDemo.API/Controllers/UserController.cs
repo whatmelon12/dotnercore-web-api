@@ -18,20 +18,17 @@ namespace restfulDemo.API.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        private readonly ILoggerManager _logger;
         private readonly IRepositoryWrapper _repository;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
 
         public UserController(
-            ILoggerManager logger,
             IRepositoryWrapper repository,
             IUserService userService,
             IMapper mapper,
             IConfiguration config)
         {
-            _logger = logger;
             _repository = repository;
             _userService = userService;
             _mapper = mapper;

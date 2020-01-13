@@ -58,13 +58,13 @@ namespace restfulDemo.API
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-
-            app.UseAuthorization();
-
             app.UseAuthentication();
 
             app.UseRequestResponseLoggingMiddleware();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
