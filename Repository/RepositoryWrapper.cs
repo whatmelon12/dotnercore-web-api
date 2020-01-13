@@ -10,6 +10,7 @@ namespace Repository
         private RepositoryContext _repositoryContext;
         private IOwnerRepository _owner;
         private IAccountRepository _account;
+        private IUserRepository _user;
 
         public RepositoryWrapper(RepositoryContext repositoryContext)
         {
@@ -38,6 +39,19 @@ namespace Repository
                 }
 
                 return _account;
+            }
+        }
+
+        public IUserRepository User
+        {
+            get
+            {
+                if(_user == null)
+                {
+                    _user = new UserRepository(_repositoryContext);
+                }
+
+                return _user;
             }
         }
 

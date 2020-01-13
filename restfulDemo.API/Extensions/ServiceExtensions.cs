@@ -1,11 +1,14 @@
-﻿using System;
+﻿using System.Text;
 using Contracts;
 using Entities;
 using LoggerService;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using PasswordHasherService;
 using Repository;
 using restfulDemo.API.ActionFilters;
 
@@ -23,6 +26,20 @@ namespace restfulDemo.API.Extensions
             });
         }
 
+        public static void ConfigureJwt(this IServiceCollection services, IConfiguration config)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]))
+                    };
+                });
+        }
+
         public static void ConfigureIISIntegration(this IServiceCollection services)
         {
             services.Configure<IISOptions>(options => { });
@@ -31,6 +48,16 @@ namespace restfulDemo.API.Extensions
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
             services.AddSingleton<ILoggerManager, LoggerManager>();
+        }
+
+        public static void ConfigureUserService(this IServiceCollection services)
+        {
+            services.AddScoped<IUserService, UserService.UserService>();
+        }
+
+        public static void ConfigurePasswordHasher(this IServiceCollection services)
+        {
+            services.AddSingleton<IPasswordHasher, PasswordHasher>();
         }
 
         public static void ConfigurePostgreSqlContext(this IServiceCollection services, IConfiguration config)

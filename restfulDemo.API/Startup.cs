@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Logging;
 using NLog;
 using restfulDemo.API.Extensions;
 
@@ -30,13 +31,15 @@ namespace restfulDemo.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureLoggerService();
             services.ConfigureCors();
+            services.ConfigureJwt(Configuration);
             services.ConfigureIISIntegration();
-            //services.ConfigurePostgreSqlContext(Configuration);
             services.ConfigureMySqlContext(Configuration);
             services.ConfigureRepositoryWrapper();
             services.AddAutoMapper(typeof(Startup));
+            services.ConfigureLoggerService();
+            services.ConfigureUserService();
+            services.ConfigurePasswordHasher();
             services.ConfigureActionFilters();
             services.AddControllers();
         }
@@ -47,6 +50,8 @@ namespace restfulDemo.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                IdentityModelEventSource.ShowPII = true;
             }
 
             app.UseErrorHandlerMiddleware();
@@ -56,6 +61,8 @@ namespace restfulDemo.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseRequestResponseLoggingMiddleware();
 

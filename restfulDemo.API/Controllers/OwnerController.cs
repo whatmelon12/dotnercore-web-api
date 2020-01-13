@@ -6,6 +6,7 @@ using AutoMapper;
 using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using restfulDemo.API.ActionFilters;
 
@@ -14,11 +15,12 @@ using restfulDemo.API.ActionFilters;
 namespace restfulDemo.API.Controllers
 {
     [Route("api/owner")]
+    [Authorize]
     public class OwnerController : Controller
     {
-        private ILoggerManager _logger;
-        private IRepositoryWrapper _repository;
-        private IMapper _mapper;
+        private readonly ILoggerManager _logger;
+        private readonly IRepositoryWrapper _repository;
+        private readonly IMapper _mapper;
 
         public OwnerController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
         {

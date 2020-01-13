@@ -12,5 +12,6 @@ namespace Entities
 
         public DbSet<Owner> Owners { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

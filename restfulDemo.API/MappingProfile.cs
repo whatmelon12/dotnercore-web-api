@@ -12,6 +12,9 @@ namespace restfulDemo.API
             CreateMap<Owner, OwnerDto>();
             CreateMap<OwnerCreationDto, Owner>();
             CreateMap<OwnerUpdateDto, Owner>();
+            CreateMap<User, UserDto>();
+            CreateMap<User, UserAuthenticatedDto>();
+            CreateMap<UserCreationDto, User>();
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Contracts
     {
         IOwnerRepository Owner { get; }
         IAccountRepository Account { get; }
+        IUserRepository User { get;  }
         Task SaveAsync();
     }
 }
