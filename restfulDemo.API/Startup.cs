@@ -54,13 +54,13 @@ namespace restfulDemo.API
                 IdentityModelEventSource.ShowPII = true;
             }
 
-            app.UseErrorHandlerMiddleware();
-
             app.UseHttpsRedirection();
 
-            app.UseAuthentication();
-
             app.UseRequestResponseLoggingMiddleware();
+
+            app.UseErrorHandlerMiddleware();
+
+            app.UseAuthentication();
 
             app.UseRouting();
 
