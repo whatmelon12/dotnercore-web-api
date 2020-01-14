@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using AmazonRekognitionService;
 using Contracts;
 using Entities;
 using LoggerService;
@@ -51,18 +52,11 @@ namespace restfulDemo.API.Extensions
             services.Configure<IISOptions>(options => { });
         }
 
-        public static void ConfigureLoggerService(this IServiceCollection services)
+        public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddSingleton<ILoggerManager, LoggerManager>();
-        }
-
-        public static void ConfigureUserService(this IServiceCollection services)
-        {
+            services.AddSingleton<IRekognitionService, RekognitionService>();
             services.AddScoped<IUserService, UserService.UserService>();
-        }
-
-        public static void ConfigurePasswordHasher(this IServiceCollection services)
-        {
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
         }
 

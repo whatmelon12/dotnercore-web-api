@@ -7,4 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.Rekognition" Version="3.3.103.15" />
+  </ItemGroup>
 </Project>

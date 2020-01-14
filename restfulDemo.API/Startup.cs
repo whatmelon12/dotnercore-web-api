@@ -37,9 +37,7 @@ namespace restfulDemo.API
             services.ConfigureMySqlContext(Configuration);
             services.ConfigureRepositoryWrapper();
             services.AddAutoMapper(typeof(Startup));
-            services.ConfigureLoggerService();
-            services.ConfigureUserService();
-            services.ConfigurePasswordHasher();
+            services.ConfigureServices();
             services.ConfigureActionFilters();
             services.AddControllers();
         }

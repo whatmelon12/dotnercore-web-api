@@ -14,4 +14,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="mono_crash.115869ea88.0.json" />
+  </ItemGroup>
 </Project>
