@@ -15,5 +15,15 @@ namespace restfulDemo.API.Extensions
         {
             app.UseMiddleware<ErrorHandlerMiddleware>();
         }
+
+        public static void UseSwaggerDocs(this IApplicationBuilder app)
+        {
+            app.UseSwagger();
+
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "RESTful API DEMO");
+            });
+        }
     }
 }

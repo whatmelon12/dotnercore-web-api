@@ -38,7 +38,7 @@ namespace restfulDemo.API.Controllers
             {
                 throw new InvalidOperationException("Missing source or target image");
             }
-
+ 
             MemoryStream sourceImage = new MemoryStream();
             MemoryStream targetImage = new MemoryStream();
 

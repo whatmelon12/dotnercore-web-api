@@ -22,7 +22,7 @@ namespace restfulDemo.API
     {
         public Startup(IConfiguration configuration)
         {
-            LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
         }
 
@@ -40,6 +40,7 @@ namespace restfulDemo.API
             services.ConfigureServices();
             services.ConfigureActionFilters();
             services.AddControllers();
+            services.ConfigureSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +60,8 @@ namespace restfulDemo.API
             app.UseErrorHandlerMiddleware();
 
             app.UseAuthentication();
+
+            app.UseSwaggerDocs();
 
             app.UseRouting();
 

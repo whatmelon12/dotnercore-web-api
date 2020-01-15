@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using PasswordHasherService;
 using Repository;
 using restfulDemo.API.ActionFilters;
@@ -56,8 +57,8 @@ namespace restfulDemo.API.Extensions
         {
             services.AddSingleton<ILoggerManager, LoggerManager>();
             services.AddSingleton<IRekognitionService, RekognitionService>();
-            services.AddScoped<IUserService, UserService.UserService>();
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
+            services.AddScoped<IUserService, UserService.UserService>();
         }
 
         public static void ConfigurePostgreSqlContext(this IServiceCollection services, IConfiguration config)
@@ -80,6 +81,14 @@ namespace restfulDemo.API.Extensions
         public static void ConfigureActionFilters(this IServiceCollection services)
         {
             services.AddScoped<ModelValidationAttribute>();
+        }
+
+        public static void ConfigureSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "RESTful API DEMO", Version = "v1" });
+            });
         }
     }
 }
